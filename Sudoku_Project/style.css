@@ -13,8 +13,16 @@ body{
     align-items: center;
     justify-content: center;
     background-color: #f0ead2;
+    flex-direction: column;
 }
 
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
 
 .wrapper{
     display: grid;
@@ -36,7 +44,6 @@ button{
     transition: all 0.3s ease;
     font-size: 25px;
     font-weight: 600;
-
 }
 
 button:hover{
