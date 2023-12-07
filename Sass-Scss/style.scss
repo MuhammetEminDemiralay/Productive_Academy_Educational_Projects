@@ -1,0 +1,11 @@
+$try : red;
+
+body{
+    background-color: $try;
+}
+
+$name : "Muhammet";
+
+.bg-#{$name}{
+    background-color: red;
+}
