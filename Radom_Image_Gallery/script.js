@@ -12,7 +12,15 @@ const body = document.querySelector("body"),
       loadBtn = document.querySelector(".load-btn"),
       setting = document.querySelector(".setting"),
       bottomContent = document.querySelector(".bottom-content"),
-      checkBtn = document.querySelector(".check");
+      checkBtn = document.querySelector(".check"),
+      closeBtn = document.querySelector(".close-btn"),
+      searchBtn = document.querySelector(".search-btn"),
+      modeText = document.querySelector(".options-box span"),
+      image1 = document.querySelector(".image-1"),
+      image2 = document.querySelector(".image-2"),
+      image3 = document.querySelector(".image-3");
+
+
       
 let accessKey = "8rnymTBmLkxRSpdhRcaMoYOmuOgEtaYeCCkkacGKhc4";
 let imgTag = [];
@@ -20,12 +28,17 @@ let width = 300;
 let height = 300;
 let allImages = [];
 let count = 30;
+let randomIndex = [];
 
 loadBtn.addEventListener("click", () => {
     window.location.reload();
 })
 
 window.addEventListener("load", () => {
+
+    if(localStorage.getItem("dark")){
+        body.classList.add("dark");
+    }
     if(localStorage.getItem("count")){
         count = 30;
     }
@@ -38,23 +51,47 @@ window.addEventListener("load", () => {
     count = localStorage.getItem("count");
     screenBox.textContent = count;
 
-
     let dynamic_api = `https://api.unsplash.com/photos/random/?client_id=${accessKey}&count=${count}`
     fetch(dynamic_api)
     .then(response => response.json())
     .then(response => allImages = response)
+    .then(response => BigImageİnitialize())
     .then(response => Createİmage())
     .catch(err => console.log(err));
+
+
 })
 
+function BigImageİnitialize(){
+    image1.src = allImages[1].urls.regular;
+    image2.src = allImages[2].urls.regular;
+    image3.src = allImages[3].urls.regular;
+}
 
 function Createİmage(){
     allImages.forEach((imgs) => {
             home.insertAdjacentHTML("beforeend",
             `<div style="width:${width}px; height:${height}px" class="image-box">
                 <img class="image" src="${imgs.urls.small}">
+                <div class="info">
+                    <i class='bx bx-search zoom'></i>
+                    <i class='bx bxs-info-circle user-info'></i>
+                    <i class='bx bxs-download download'></i>
+                </div>
             </div>`)
     })
+
+    
+    let zoom = document.querySelectorAll(".zoom");
+    zoom.forEach((zoom) => zoom.addEventListener("click", (e) => {
+        let targetImageSrc = e.target.parentElement.parentElement.firstElementChild.src;
+        home.insertAdjacentHTML("afterbegin", 
+            `<img class"zoom-image" src="${targetImageSrc}">
+            `
+        )
+        
+    }) )
+
 }
 
 widthSize.addEventListener("input", (e) => {
@@ -68,7 +105,6 @@ heightSize.addEventListener("input", (e) => {
     heightText.textContent = e.target.value;
     localStorage.setItem("height", e.target.value);
 })
-
 
 incrementBtn.addEventListener("click", () => {
     count++;
@@ -86,6 +122,56 @@ setting.addEventListener("click", () => {
     bottomContent.classList.toggle("active");
 })
 
+closeBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+})
+
+searchBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+})
+
 checkBtn.addEventListener("click", () => {
     body.classList.toggle("dark");
+    if(body.classList.contains("dark")){
+        localStorage.setItem("dark", "dark");
+    }else{
+        localStorage.removeItem("dark")
+    }
+
+    if(body.classList.contains("dark")){
+        modeText.textContent = "Light Mode"
+    }else{
+        modeText.textContent = "Dark Mode"
+    }
 })
+
+setInterval(() => {
+    let initializeTime = 100;
+    
+
+    if(allImages != null){
+        randomIndex.length = 0;
+    }
+
+    for (let i = 0; i < 3; i++) {
+        randomIndex.push(Math.floor(Math.random() * 30))
+    }
+   
+   allImages.forEach((img, index) => {
+
+    for (let i = 0; i < 3; i++) {
+        if(randomIndex[0] === index){
+            image1.src = allImages[randomIndex[0]].urls.regular;
+        }
+        if(randomIndex[1] === index){
+            image2.src = allImages[randomIndex[1]].urls.regular;
+        }
+        if(randomIndex[2] === index){
+            image3.src = allImages[randomIndex[2]].urls.regular;
+        }
+    }
+    
+   })
+}, 3000)
+
+

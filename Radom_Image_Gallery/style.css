@@ -28,7 +28,65 @@ body{
     position: relative;
 }
 
+body.dark{
+    --background: #212529;
+    --primary-color: #495057;
+    --secondary-color:#dee2e6;
+    --text-color : #495057;
+    --main-color : #fff;
+}
 
+body.dark .sidebar.text,
+body.dark .icon{
+    color: #fff;
+}
+
+body.dark .home{
+    background-color: #343a40;
+}
+
+body.dark .nav-links .nav-link:hover
+{
+    background-color: #fff;
+    color: var(--background);
+}
+
+body.dark .search-btn{
+    color: var(--text-color);
+}
+
+body.dark .nav-link .text{
+    color: #fff;
+}
+
+body.dark .width-text,
+body.dark .height-text,
+body.dark h3,
+body.dark h5,
+body.dark .decrement,
+body.dark .increment,
+body.dark .load-btn{
+    color: #fff;
+}
+
+body.dark .logo,
+body.dark .close-btn{
+    color: #212529;
+}
+
+body.dark .load-box:hover .load-btn,
+body.dark a:hover .text{
+    color: #212529;
+}
+
+body.dark .increment-box:hover .increment,
+body.dark .decrement-box:hover .decrement{
+    color: #212529;
+}
+
+body.dark .check{
+    transform: translateX(16px);
+}
 
 .sidebar{
     display: flex;
@@ -37,12 +95,33 @@ body{
     left: 0;
     top: 0;
     row-gap: 10px;
-    min-width: 250px;
-    max-width: 250px;
-    width: 100%;
+    width: 250px;
     height: 100vh;
     padding: 10px;
+    background-color: var(--background);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transition: var(--transition-04);
+    z-index: 100;
+}
+
+.sidebar.close{
+    width: 70px;
+}
+
+.sidebar.close .header-text{
+    opacity: 0;
+}
+
+.sidebar.close .text{
+    opacity: 0;
+}
+
+.sidebar.close .bottom-content{
+    display: none;
+}
+
+.sidebar.close .close-btn{
+    transform: rotate(180deg);
 }
 
 .sidebar header{
@@ -57,17 +136,17 @@ header .logo{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    min-width: 48px;
+    height: 48px;
     background-color: var(--main-color);
     border: 1px solid black;
-    color: var(--primary-color);
+    color: #fff;
     font-size: 32px;
     border-radius: 5px;
 }
 
 .header-text{
-    color: var(--main-color);
+    color: var(--text-color);
     font-weight: 600;
 }
 
@@ -76,19 +155,21 @@ header .close-box{
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: -27px;
+    right: -26px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background-color: var(--main-color);
-    color: var(--primary-color);
     cursor: pointer;
 }
 
 .close-box .close-btn{
     font-size: 25px;
+    transition: 0.5s;
+    color: #fff;
+
 }
 
 
@@ -109,7 +190,8 @@ header .close-box{
 .menu .search-box{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 14px;
     column-gap: 18px;
     width: 100%;
     height: 50px;
@@ -125,6 +207,7 @@ header .close-box{
 
 .sidebar .text{
     color: var(--text-color);
+    transition: var(--transition-04);
 }
 
 .search-box input{
@@ -187,7 +270,7 @@ header .close-box{
     row-gap: 10px;
     width: 100%;
     height: 200px;
-    transition: var(--transition-02)
+    transition: var(--transition-04)
 }
 
 .bottom-content.active{
@@ -293,9 +376,9 @@ header .close-box{
     align-items: center;
     position: absolute;
     bottom: 10px;
-    left: 20px;
+    left: 10px;
     column-gap: 6px;
-    width: calc(100% - 30px);
+    width: calc(100% - 20px);
     height: 50px;
     padding: 0 0 0 12px;
     background-color: var(--secondary-color);
@@ -327,11 +410,11 @@ header .close-box{
     display: flex;
     align-items: center;
     position: absolute;
-    right: 5px;
+    right: 6px;
     width: 36px;
     height: 18px;
     border: 1px solid black;
-    padding: 0 2px;
+    padding: 0 3px;
     border-radius: 9px;
     background-color: var(--primary-color);
 }
@@ -342,6 +425,7 @@ header .close-box{
     background-color: var(--main-color);
     border: 1px solid black;
     border-radius: 50%;
+    transition: var(--transition-04);
     cursor: pointer;
 }
 
@@ -359,53 +443,122 @@ header .close-box{
     opacity: 0;
 }
 
+body.dark .mode .sun{
+    opacity: 1;
+}
 
-
-
-
-
-
-
+body.dark .mode .moon{
+    opacity: 0;
+}
 
 
 .home{
     display: flex;
     justify-content: center;
     align-content: flex-start;
+    position: relative;
+    left: 250px;
+    width: calc(100% - 250px);
     gap: 10px;
     flex-wrap: wrap;
-    margin-left: 250px;
     padding: 70px 30px 30px 30px;
+    background-color: #b5e2fa;
+    transition: var(--transition-04)
+}
+
+.sidebar.close ~ .home{
+    left: 70px;
+    width: calc(100% - 70px);
 }
 
 .home .image-box{
     border: 1px solid black;
-    color: red;
+    background-color: red;
+    position: relative;
+
 }
 
 .image-box .image{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all 1s linear;
 }
 
 .home .big-image-box{
     display: flex;
     justify-content: center;
     width: 100%; 
-    height: 250px; 
-    padding: 0 30px;
+    height: 280px; 
+    padding:30px 32px;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    background-color: #7f7f7f;
 }
 
 .big-image-box .big-box{
     height: 100%;
-    max-width: 600px;
-    width: 100%;
-    border: 1px solid black;
+    width: 33%;
+    border: 6px solid #fff;
 }
 
 .big-box .big-image{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: var(--transition-05);
+}
+
+.image-box .info{
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 22%;
+    transition: var(--transition-02);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+    visibility: hidden;
+}
+
+.image-box:hover .info{
+    visibility: visible;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+
+.info i{
+    background-color: #fff;
+    font-size: 26px;
+    font-weight: 500;
+    color: #f61060;
+    padding:8px ;
+    cursor: pointer;
+    border-radius: 20%;
+}
+
+body.zoom-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+
+.zoom-image{
+    position: fixed;
+    left: 100px;
+    width: 200px;
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
 }
