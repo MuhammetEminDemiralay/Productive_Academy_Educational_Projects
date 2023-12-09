@@ -473,16 +473,20 @@ body.dark .mode .moon{
 
 .home .image-box{
     border: 1px solid black;
-    background-color: red;
+    background-color: #fff;
     position: relative;
-
+    
 }
 
+
 .image-box .image{
+    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: all 1s linear;
+    z-index: 10;
+    transform-origin: left;
 }
 
 .home .big-image-box{
@@ -499,7 +503,7 @@ body.dark .mode .moon{
 .big-image-box .big-box{
     height: 100%;
     width: 33%;
-    border: 6px solid #fff;
+    border: 7px solid #fff;
 }
 
 .big-box .big-image{
@@ -591,4 +595,3 @@ body.dark .mode .moon{
 .initialize-zoom-box{
     display: none;
 }
-

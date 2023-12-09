@@ -21,7 +21,8 @@ const body = document.querySelector("body"),
       image3 = document.querySelector(".image-3"),
       zoomWrapper = document.querySelector(".zoom-wrapper"),
       zoomClose = document.querySelector(".zoom-close-box"),
-      zoomBox = document.querySelector(".zoom-box");
+      zoomBox = document.querySelector(".zoom-box"),
+      backgroundInfo = document.querySelectorAll(".background-info");
 
 
 
@@ -63,7 +64,7 @@ window.addEventListener("load", () => {
     .then(response => Createİmage())
     .catch(err => console.log(err));
 
-
+   
 })
 
 function BigImageİnitialize(){
@@ -77,12 +78,30 @@ function Createİmage(){
             home.insertAdjacentHTML("beforeend",
             `<div style="width:${width}px; height:${height}px" class="image-box">
                 <img class="image" src="${imgs.urls.small}">
+                <div clas="background-info" style="width:100%; height:50%; background-color:#1e96fc; display:flex; align-items:center; justify-content:center;">
+                    <div class="profile-image" style="width:40%; height:80%; border-radius: 50%; background-color:#fff; position:relative;">
+                        <img style="position:absolute; width:100%; height:100%;  padding:5px; border-radius:50%;" src="${imgs.user.profile_image.large}">
+                    </div>
+                </div>
+                <div style="padding:5%; position:relative;">
+                    <div style="font-weight:700; font-size:1.2rem; margin:6px 0;">${imgs.user.name}</div>
+                    <div style="margin:3px 0; font-size:0.8rem;"><b>İmage Description : </b>${imgs.alt_description}</div>
+                    <div style="margin:3px 0; font-size:1.2rem;"></div>
+                    <span><b>Location : </b>${imgs.location.city} / ${imgs.location.country}</span>
+                    <div style="position:absolute; right:3px; top:3px; display:flex; font-size:18px; margin:3px;">
+                        <i style="color:#dd2a7b;" class='bx bxl-instagram-alt'></i>
+                        <i style="color:#08a0e9;" class='bx bxl-twitter'></i>
+                        <i style="color:#4267b3;" class='bx bxl-facebook-circle'></i>
+                        <i style="color:#ff0000;" class='bx bxl-youtube' ></i>
+                    </div>
+                </div>
                 <div class="info">
                     <i class='bx bx-search zoom'></i>
                     <i class='bx bxs-info-circle user-info'></i>
                     <i class='bx bxs-download download'></i>
                 </div>
             </div>`)
+
     })
 
     
@@ -103,12 +122,28 @@ function Createİmage(){
         )
     }))
 
-    // let userInfo = document.querySelectorAll(".user-info");
-    // userInfo.forEach((user) => user.addEventListener("click", (e) => {
-
-    //     user.classList.toogle("turn-image");
-    // }))
+    let userInfo = document.querySelectorAll(".user-info");
+    userInfo.forEach((user) => user.addEventListener("click", (e) => {
+        user.classList.toggle("turn-image");
+        if(user.classList.contains("turn-image")){
+            e.target.parentElement.parentElement.firstElementChild.style = "transform:rotateY(90deg);"
+        }else{
+            e.target.parentElement.parentElement.firstElementChild.style = "transform:rotateY(0deg);"
+        }
+    }))
     
+
+    let downloadBtn = document.querySelectorAll(".download");
+    downloadBtn.forEach((btn) => btn.addEventListener("click", (e) => {
+        let imgUrl = e.target.parentElement.parentElement.firstElementChild.src;
+        allImages.forEach(img => {
+            if(img.urls.small == imgUrl){
+                let fileLink = img.links.download;
+                location.href = fileLink;
+            }
+            console.log(allImages);
+        })
+    }) )
 
 }
 
@@ -194,6 +229,6 @@ setInterval(() => {
     }
     
    })
-}, 3000)
+}, 2000)
 
 
