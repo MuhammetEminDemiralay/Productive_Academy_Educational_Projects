@@ -18,7 +18,11 @@ const body = document.querySelector("body"),
       modeText = document.querySelector(".options-box span"),
       image1 = document.querySelector(".image-1"),
       image2 = document.querySelector(".image-2"),
-      image3 = document.querySelector(".image-3");
+      image3 = document.querySelector(".image-3"),
+      zoomWrapper = document.querySelector(".zoom-wrapper"),
+      zoomClose = document.querySelector(".zoom-close-box"),
+      zoomBox = document.querySelector(".zoom-box");
+
 
 
       
@@ -35,7 +39,7 @@ loadBtn.addEventListener("click", () => {
 })
 
 window.addEventListener("load", () => {
-
+    zoomBox.classList.add("initialize-zoom-box");
     if(localStorage.getItem("dark")){
         body.classList.add("dark");
     }
@@ -84,13 +88,27 @@ function Createİmage(){
     
     let zoom = document.querySelectorAll(".zoom");
     zoom.forEach((zoom) => zoom.addEventListener("click", (e) => {
-        let targetImageSrc = e.target.parentElement.parentElement.firstElementChild.src;
-        home.insertAdjacentHTML("afterbegin", 
-            `<img class"zoom-image" src="${targetImageSrc}">
-            `
-        )
+        zoomBox.classList.remove("initialize-zoom-box");
+        if(zoomWrapper){
+            zoomWrapper.innerHTML = "";
+        }
+        if(zoomBox.classList.contains("zoom-box-visiblity")){
+            zoomBox.classList.remove("zoom-box-visiblity");
+        }
         
-    }) )
+        let targetImageSrc = e.target.parentElement.parentElement.firstElementChild.src;
+        
+        zoomWrapper.insertAdjacentHTML("afterbegin", 
+            `<img width="500px" height="500px" style="object-fit:cover; z-index:95;" class"zoom-image" src="${targetImageSrc}">`
+        )
+    }))
+
+    // let userInfo = document.querySelectorAll(".user-info");
+    // userInfo.forEach((user) => user.addEventListener("click", (e) => {
+
+    //     user.classList.toogle("turn-image");
+    // }))
+    
 
 }
 
@@ -143,6 +161,10 @@ checkBtn.addEventListener("click", () => {
     }else{
         modeText.textContent = "Dark Mode"
     }
+})
+
+zoomClose.addEventListener("click", () => {
+    zoomBox.classList.toggle("zoom-box-visiblity");
 })
 
 setInterval(() => {

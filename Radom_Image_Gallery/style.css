@@ -510,7 +510,7 @@ body.dark .mode .moon{
 }
 
 .image-box .info{
-    z-index: 100;
+    z-index: 96;
     position: absolute;
     top: 0;
     width: 100%;
@@ -539,26 +539,56 @@ body.dark .mode .moon{
     font-size: 26px;
     font-weight: 500;
     color: #f61060;
-    padding:8px ;
+    padding:6px ;
     cursor: pointer;
     border-radius: 20%;
 }
 
-body.zoom-image{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+
+.zoom-box{
+    position: fixed;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translateX(-50%);
+    z-index: 97;
+    
 }
 
-
-.zoom-image{
-    position: fixed;
-    left: 100px;
-    width: 200px;
+.zoom-box .zoom-wrapper{
+    position: relative;
     width: 100%;
-    max-height: 200px;
     height: 100%;
 }
+
+
+.zoom-box .zoom-close-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: #f61060;
+    z-index: 98;
+    cursor: pointer;
+}
+
+.zoom-close-box .zoom-close{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+    z-index: 99;
+
+}
+
+.zoom-box.zoom-box-visiblity{
+    display: none;
+}
+
+.initialize-zoom-box{
+    display: none;
+}
+
